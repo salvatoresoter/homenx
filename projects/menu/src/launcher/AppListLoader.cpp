@@ -122,7 +122,7 @@ bool fetchDaemonCatalog(std::vector<PendingApp>& out, bool prefetchIcons) {
     for (auto& ent : catalog) {
         if (ent.titleId == 0 || ent.name.empty())
             continue;
-
+if (ent.viewFlags != 0 && !switchu::ns::viewHasFlag(ent.viewFlags, switchu::ns::AppViewFlag_CanLaunch) && !switchu::ns::viewHasFlag(ent.viewFlags, switchu::ns::AppViewFlag_IsGameCard)) continue; // hide archived
         std::snprintf(tidBuf, sizeof(tidBuf), "%016lX", (unsigned long)ent.titleId);
         PendingApp a;
         a.id      = tidBuf;
