@@ -374,6 +374,7 @@ std::vector<Game> listGames() {
             g.launches = st.total_launches;
         }
     }
+    games.erase(std::remove_if(games.begin(), games.end(), [](const Game& g) { return g.flags != 0 && !(g.flags & switchu::ns::AppViewFlag_CanLaunch) && !(g.flags & switchu::ns::AppViewFlag_IsGameCard); }), games.end()); // hide archived
     return games;
 }
 
